@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <property name="baseDirectory" value="/home/code/java"/>
+    <property name="baseDirectory" value="/home/code/java/logs"/>
     <property name="pattern" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n"/>
 
     <appender name="rollingAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
