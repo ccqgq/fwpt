@@ -35,11 +35,11 @@ public class StudentController {
                              @RequestParam(defaultValue = "10") Integer pageSize,
                              HttpSession session) {
         UserLogin userLogin = (UserLogin) session.getAttribute("user");
-        if(!UserRoleEnum.STUDENT.getCode().equals(userLogin.getResource())) {
-            new ResultDto(403,"未登录","");
+        if (!(UserRoleEnum.STUDENT.getCode().equals(userLogin.getResource()))) {
+            new ResultDto(403, "未登录", "");
         }
         //获取所有的课程
-        return new ResultDto(200, "", courseService.coulist(pageNum, pageSize, 1,userLogin.getOpenId()));
+        return new ResultDto(200, "", courseService.coulist(pageNum, pageSize, 1, userLogin.getOpenId()));
     }
 
 
@@ -48,17 +48,17 @@ public class StudentController {
                                @RequestParam(defaultValue = "10") Integer pageSize,
                                HttpSession session) {
         UserLogin userLogin = (UserLogin) session.getAttribute("user");
-        if(!UserRoleEnum.STUDENT.getCode().equals(userLogin.getResource())) {
-            new ResultDto(403,"未登录","");
+        if (!(UserRoleEnum.STUDENT.getCode().equals(userLogin.getResource()))) {
+            new ResultDto(403, "未登录", "");
         }
-        return new ResultDto(200,"",courseService.myCouList(pageNum,pageSize,userLogin.getOpenId()));
+        return new ResultDto(200, "", courseService.myCouList(pageNum, pageSize, userLogin.getOpenId()));
     }
 
     @GetMapping(value = "chooseCou")
     public ResultDto chooseCou(HttpSession session, Integer couId) {
         UserLogin userLogin = (UserLogin) session.getAttribute("user");
-        if(!UserRoleEnum.STUDENT.getCode().equals(userLogin.getResource())) {
-            new ResultDto(403,"未登录","");
+        if (!(UserRoleEnum.STUDENT.getCode().equals(userLogin.getResource()))) {
+            new ResultDto(403, "未登录", "");
         }
         Student student = studentService.findById(userLogin.getOpenId());
         StuCou stuCou = new StuCou();
@@ -67,7 +67,6 @@ public class StudentController {
         stuCouService.insert(stuCou);
         return new ResultDto(200, "成功", "");
     }
-
 
 
 }
