@@ -1,5 +1,6 @@
 package com.qgq.fwpt.openaccount.controller;
 
+import com.qgq.fwpt.common.Enums.UserRoleEnum;
 import com.qgq.fwpt.common.dto.ResultDto;
 import com.qgq.fwpt.openaccount.entity.StuCou;
 import com.qgq.fwpt.openaccount.entity.Student;
@@ -34,6 +35,9 @@ public class StudentController {
                              @RequestParam(defaultValue = "10") Integer pageSize,
                              HttpSession session) {
         UserLogin userLogin = (UserLogin) session.getAttribute("user");
+        if(UserRoleEnum.STUDENT.equals(userLogin.getResource())) {
+            new ResultDto(403,"未登录","");
+        }
         //获取所有的课程
         return new ResultDto(200, "", courseService.coulist(pageNum, pageSize, 1,userLogin.getOpenId()));
     }
@@ -44,12 +48,18 @@ public class StudentController {
                                @RequestParam(defaultValue = "10") Integer pageSize,
                                HttpSession session) {
         UserLogin userLogin = (UserLogin) session.getAttribute("user");
+        if(UserRoleEnum.STUDENT.equals(userLogin.getResource())) {
+            new ResultDto(403,"未登录","");
+        }
         return new ResultDto(200,"",courseService.myCouList(pageNum,pageSize,userLogin.getOpenId()));
     }
 
     @GetMapping(value = "chooseCou")
     public ResultDto chooseCou(HttpSession session, Integer couId) {
         UserLogin userLogin = (UserLogin) session.getAttribute("user");
+        if(UserRoleEnum.STUDENT.equals(userLogin.getResource())) {
+            new ResultDto(403,"未登录","");
+        }
         Student student = studentService.findById(userLogin.getOpenId());
         StuCou stuCou = new StuCou();
         stuCou.setCouId(couId);
