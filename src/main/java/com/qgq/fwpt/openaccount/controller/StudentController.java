@@ -35,7 +35,7 @@ public class StudentController {
                              @RequestParam(defaultValue = "10") Integer pageSize,
                              HttpSession session) {
         UserLogin userLogin = (UserLogin) session.getAttribute("user");
-        if(UserRoleEnum.STUDENT.equals(userLogin.getResource())) {
+        if(!UserRoleEnum.STUDENT.getCode().equals(userLogin.getResource())) {
             new ResultDto(403,"未登录","");
         }
         //获取所有的课程
@@ -48,7 +48,7 @@ public class StudentController {
                                @RequestParam(defaultValue = "10") Integer pageSize,
                                HttpSession session) {
         UserLogin userLogin = (UserLogin) session.getAttribute("user");
-        if(UserRoleEnum.STUDENT.equals(userLogin.getResource())) {
+        if(!UserRoleEnum.STUDENT.getCode().equals(userLogin.getResource())) {
             new ResultDto(403,"未登录","");
         }
         return new ResultDto(200,"",courseService.myCouList(pageNum,pageSize,userLogin.getOpenId()));
@@ -57,7 +57,7 @@ public class StudentController {
     @GetMapping(value = "chooseCou")
     public ResultDto chooseCou(HttpSession session, Integer couId) {
         UserLogin userLogin = (UserLogin) session.getAttribute("user");
-        if(UserRoleEnum.STUDENT.equals(userLogin.getResource())) {
+        if(!UserRoleEnum.STUDENT.getCode().equals(userLogin.getResource())) {
             new ResultDto(403,"未登录","");
         }
         Student student = studentService.findById(userLogin.getOpenId());

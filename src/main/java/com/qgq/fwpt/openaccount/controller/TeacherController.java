@@ -45,7 +45,7 @@ public class TeacherController {
     @GetMapping(value = "couList")
     public ResultDto couList(HttpSession session) {
         UserLogin userLogin = (UserLogin)session.getAttribute("user");
-        if(userLogin.getResource().equals(UserRoleEnum.TEACHER.getCode())) {
+        if(UserRoleEnum.TEACHER.getCode().equals(userLogin.getResource())) {
             return new ResultDto(200,"",courseService.findByTeaId(userLogin.getOpenId()));
         }
         return new ResultDto(403,"","");
