@@ -39,7 +39,7 @@ public class StudentController {
                              HttpSession session) {
         UserLogin userLogin = (UserLogin) session.getAttribute("user");
         if (!(UserRoleEnum.STUDENT.getCode().equals(userLogin.getResource()))) {
-            new ResultDto(403, "未登录", "");
+            return new ResultDto(403, "未登录", "");
         }
         //获取所有的课程
         return new ResultDto(200, "", courseService.coulist(pageNum, pageSize, 1, userLogin.getOpenId()));
@@ -52,7 +52,7 @@ public class StudentController {
                                HttpSession session) {
         UserLogin userLogin = (UserLogin) session.getAttribute("user");
         if (!(UserRoleEnum.STUDENT.getCode().equals(userLogin.getResource()))) {
-            new ResultDto(403, "未登录", "");
+            return new ResultDto(403, "未登录", "");
         }
         return new ResultDto(200, "", courseService.myCouList(pageNum, pageSize, userLogin.getOpenId()));
     }
@@ -61,7 +61,7 @@ public class StudentController {
     public ResultDto chooseCou(HttpSession session, Integer couId) {
         UserLogin userLogin = (UserLogin) session.getAttribute("user");
         if (!(UserRoleEnum.STUDENT.getCode().equals(userLogin.getResource()))) {
-            new ResultDto(403, "未登录", "");
+            return new ResultDto(403, "未登录", "");
         }
         Student student = studentService.findById(userLogin.getOpenId());
         StuCou stuCou = new StuCou();
