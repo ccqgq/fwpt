@@ -1,6 +1,10 @@
 package com.qgq.fwpt.config;
 
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qgq.fwpt.openaccount.aspect.LoginInterceptor;
 import org.hibernate.validator.HibernateValidator;
 import org.slf4j.Logger;
@@ -9,6 +13,10 @@ import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 import org.springframework.web.servlet.DispatcherServlet;
@@ -16,6 +24,12 @@ import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import java.nio.charset.Charset;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.TimeZone;
 
 
 /**
@@ -69,9 +83,35 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
                 .addPathPatterns("/**")
                 .excludePathPatterns("/api/user/login")
                 .excludePathPatterns("/api/message/messageList")
-                .excludePathPatterns("/api/admin/userLogout");
+                .excludePathPatterns("/api/stu/grade");
 
         super.addInterceptors(registry);
+    }
+
+    @Override
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        super.configureMessageConverters(converters);
+        logger.info("==== mappingJackson2HttpMessageConverter init ====");
+
+        MappingJackson2HttpMessageConverter jacksonConverter = new MappingJackson2HttpMessageConverter();
+        List<MediaType> mediaTypeList = new ArrayList<>();
+        mediaTypeList.add(new MediaType(MediaType.APPLICATION_JSON, Charset.forName("UTF-8")));
+        mediaTypeList.add(new MediaType(MediaType.TEXT_HTML, Charset.forName("UTF-8")));
+        mediaTypeList.add(new MediaType(MediaType.TEXT_PLAIN, Charset.forName("UTF-8")));
+        jacksonConverter.setSupportedMediaTypes(mediaTypeList);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+        objectMapper.setTimeZone(TimeZone.getDefault());
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.PUBLIC_ONLY);
+        jacksonConverter.setObjectMapper(objectMapper);
+
+        logger.info("==== stringHttpMessageConverter init ====");
+        StringHttpMessageConverter stringConverter = new StringHttpMessageConverter();
+
+        converters.add(stringConverter);
+        converters.add(jacksonConverter);
     }
 
 

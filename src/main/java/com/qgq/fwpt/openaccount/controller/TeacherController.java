@@ -28,27 +28,27 @@ public class TeacherController {
 
 
     @PostMapping(value = "addCou")
-    public ResultDto add(@RequestBody Course course,HttpSession session) {
-        UserLogin userLogin = (UserLogin)session.getAttribute("user");
+    public ResultDto add(@RequestBody Course course, HttpSession session) {
+        UserLogin userLogin = (UserLogin) session.getAttribute("user");
         Teacher teacher = teacherService.findById(userLogin.getOpenId());
-        if(teacher==null) {
-            return new ResultDto(403,"没有权限","");
+        if (teacher == null) {
+            return new ResultDto(403, "没有权限", "");
         }
         course.setCollege(teacher.getCollege());
         course.setTeaId(teacher.getId());
         course.setTaeName(teacher.getTeaName());
         course.setStatus(0);
         courseService.insert(course);
-        return new ResultDto(200,"","");
+        return new ResultDto(200, "", "");
     }
 
     @GetMapping(value = "couList")
     public ResultDto couList(HttpSession session) {
-        UserLogin userLogin = (UserLogin)session.getAttribute("user");
-        if(UserRoleEnum.TEACHER.getCode().equals(userLogin.getResource())) {
-            return new ResultDto(200,"",courseService.findByTeaId(userLogin.getOpenId()));
+        UserLogin userLogin = (UserLogin) session.getAttribute("user");
+        if (UserRoleEnum.TEACHER.getCode().equals(userLogin.getResource())) {
+            return new ResultDto(200, "", courseService.findByTeaId(userLogin.getOpenId()));
         }
-        return new ResultDto(403,"","");
+        return new ResultDto(403, "", "");
     }
 
 }

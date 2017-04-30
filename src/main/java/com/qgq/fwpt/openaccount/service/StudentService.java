@@ -43,11 +43,11 @@ public class StudentService {
     @Transactional
     public void delStu(Integer id) {
         studentMapper.deleteByPrimaryKey(id);
-        userService.del(id,UserRoleEnum.STUDENT.getCode());
+        userService.del(id, UserRoleEnum.STUDENT.getCode());
     }
 
     public SimplePageInfo<Student> stuList(Integer pageNum, Integer pageSize) {
-        PageHelper.startPage(pageNum,pageSize);
+        PageHelper.startPage(pageNum, pageSize);
         return new SimplePageInfo<>(studentMapper.selectByExample(new StudentExample()));
     }
 

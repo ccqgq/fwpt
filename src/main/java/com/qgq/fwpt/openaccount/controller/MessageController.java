@@ -64,10 +64,10 @@ public class MessageController {
     //@formatter:on
     @GetMapping(value = "messageList")
     public ResultDto messageList() {
-        Map<String,List<Message>> map = new HashMap<>();
-        map.put("job",messageService.getMessageList(0));
-        map.put("inform",messageService.getMessageList(1));
-        return new ResultDto(200,"成功",map);
+        Map<String, List<Message>> map = new HashMap<>();
+        map.put("job", messageService.getMessageList(0));
+        map.put("inform", messageService.getMessageList(1));
+        return new ResultDto(200, "成功", map);
 
     }
 
@@ -94,16 +94,16 @@ public class MessageController {
         if (UserRoleEnum.STUDENT.getCode().equals(userLogin.getResource())) {
             return new ResultDto(403, "没有权限", "");
         }
-        if(UserRoleEnum.ADMIN.getCode().equals(userLogin.getResource())){
+        if (UserRoleEnum.ADMIN.getCode().equals(userLogin.getResource())) {
             message.setPublisher("管理员");
         }
-        if(UserRoleEnum.TEACHER.getCode().equals(userLogin.getResource())) {
+        if (UserRoleEnum.TEACHER.getCode().equals(userLogin.getResource())) {
             Teacher teacher = teacherService.findById(userLogin.getOpenId());
             message.setPublisher(teacher.getTeaName());
         }
         message.setCreateTime(new Date());
         messageService.insert(message);
-        return new ResultDto(200,"发布成功","");
+        return new ResultDto(200, "发布成功", "");
     }
 
 

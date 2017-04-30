@@ -40,15 +40,15 @@ public class TeacherService {
     @Transactional
     public void del(Integer id) {
         teacherMapper.deleteByPrimaryKey(id);
-        userService.del(id,UserRoleEnum.TEACHER.getCode());
+        userService.del(id, UserRoleEnum.TEACHER.getCode());
     }
 
-    public Teacher findById(Integer id){
+    public Teacher findById(Integer id) {
         return teacherMapper.selectByPrimaryKey(id);
     }
 
     public SimplePageInfo taeList(Integer pageNum, Integer pageSize) {
-        PageHelper.startPage(pageNum,pageSize);
+        PageHelper.startPage(pageNum, pageSize);
         return new SimplePageInfo(teacherMapper.selectByExample(new TeacherExample()));
     }
 }

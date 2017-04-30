@@ -14,7 +14,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 
 public class LoginInterceptor implements HandlerInterceptor {
 
-    private String userNotLoginMsg = Json.object2String(new ResultDto(403,"未登录",""));
+    private String userNotLoginMsg = Json.object2String(new ResultDto(403, "未登录", ""));
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,

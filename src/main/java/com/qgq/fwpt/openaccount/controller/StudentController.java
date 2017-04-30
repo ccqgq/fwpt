@@ -2,6 +2,7 @@ package com.qgq.fwpt.openaccount.controller;
 
 import com.qgq.fwpt.common.Enums.UserRoleEnum;
 import com.qgq.fwpt.common.dto.ResultDto;
+import com.qgq.fwpt.openaccount.RO.Grade;
 import com.qgq.fwpt.openaccount.entity.StuCou;
 import com.qgq.fwpt.openaccount.entity.Student;
 import com.qgq.fwpt.openaccount.entity.UserLogin;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
 
 /**
  * Created on 2017/04/08
@@ -29,6 +31,7 @@ public class StudentController {
     private StudentService studentService;
     @Resource
     private StuCouService stuCouService;
+
 
     @GetMapping(value = "couList")
     public ResultDto couList(@RequestParam(defaultValue = "1") Integer pageNum,
@@ -67,6 +70,14 @@ public class StudentController {
         stuCouService.insert(stuCou);
         return new ResultDto(200, "成功", "");
     }
+
+    @RequestMapping(value = "grade",produces = "application/json; charset=utf-8")
+    public String getGarde(@RequestBody Grade grade) {
+        return courseService.postQueryDGrade(grade);
+
+    }
+
+
 
 
 }

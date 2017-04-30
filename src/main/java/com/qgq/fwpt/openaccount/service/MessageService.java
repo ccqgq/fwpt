@@ -18,7 +18,7 @@ public class MessageService {
     @Resource
     private MessageMapper messageMapper;
 
-    public List<Message> getMessageList (Integer type){
+    public List<Message> getMessageList(Integer type) {
         MessageExample messageExample = new MessageExample();
         messageExample.createCriteria()
                 .andTypeEqualTo(type);

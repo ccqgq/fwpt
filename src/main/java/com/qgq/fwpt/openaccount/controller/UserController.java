@@ -54,21 +54,21 @@ public class UserController {
     }
 
     @PostMapping(value = "logout")
-    public ResultDto logout(HttpSession session){
+    public ResultDto logout(HttpSession session) {
         session.removeAttribute("user");
-        return new ResultDto(200,"","");
+        return new ResultDto(200, "", "");
     }
 
     @PostMapping(value = "revisePassword")
     public ResultDto revisePassword(@RequestBody UserLogin userLogin, HttpSession session) {
-        UserLogin sessionUserLogin = (UserLogin)session.getAttribute("user");
-        if(sessionUserLogin.getNumber().equals(userLogin.getNumber())) {
+        UserLogin sessionUserLogin = (UserLogin) session.getAttribute("user");
+        if (sessionUserLogin.getNumber().equals(userLogin.getNumber())) {
             userLogin.setId(sessionUserLogin.getId());
             userService.update(userLogin);
             session.removeAttribute("user");
-            return new ResultDto(403,"没有权限","");
+            return new ResultDto(403, "没有权限", "");
         }
-        return new ResultDto(403,"没有权限","");
+        return new ResultDto(403, "没有权限", "");
 
     }
 

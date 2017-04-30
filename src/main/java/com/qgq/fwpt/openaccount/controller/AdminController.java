@@ -62,34 +62,33 @@ public class AdminController {
     }
 
     /**
-     *
      * 获取学生列表（GET）:api/admin/stuList
      * 入参:
      * pageNum: 第几页（默认第一页）
      * pageSize: 每页数据（默认十个）
      * 出参:
      * {
-     *     "code": 200,
-     *     "message": "成功".
-     *     "data": {
-     *         pageNum: 1,
-               pageSize: 0,
-               size: 0,
-               orderBy: null,
-               total: 0,
-               pages: 1,
-               list: [
-                 {
-                    "id": 1,
-                    "stuName": "学生姓名",
-                    "stuNumber": "学号",
-                    "email": "邮箱",
-                    "college": "学院",
-                    "grade": "班级",
-                    "status": 0 （状态 0:注册  1:未注册)
-                 }
-               ]
-     *     }
+     * "code": 200,
+     * "message": "成功".
+     * "data": {
+     * pageNum: 1,
+     * pageSize: 0,
+     * size: 0,
+     * orderBy: null,
+     * total: 0,
+     * pages: 1,
+     * list: [
+     * {
+     * "id": 1,
+     * "stuName": "学生姓名",
+     * "stuNumber": "学号",
+     * "email": "邮箱",
+     * "college": "学院",
+     * "grade": "班级",
+     * "status": 0 （状态 0:注册  1:未注册)
+     * }
+     * ]
+     * }
      * }
      */
     @GetMapping(value = "stuList")
@@ -99,38 +98,37 @@ public class AdminController {
         if (!UserRoleEnum.ADMIN.getCode().equals(userLogin.getResource())) {
             return new ResultDto(403, "不是管理员没有权限", "");
         }
-        return new ResultDto(200, "查询成功", studentService.stuList(pageNum,pageSize));
+        return new ResultDto(200, "查询成功", studentService.stuList(pageNum, pageSize));
     }
 
     /**
-     *
      * 获取学生列表（GET）:api/admin/taeList
      * 入参:
      * pageNum: 第几页（默认第一页）
      * pageSize: 每页数据（默认十个）
      * 出参:
      * {
-     *     "code": 200,
-     *     "message": "成功".
-     *     "data": {
-     *         pageNum: 1,
-               pageSize: 0,
-               size: 0,
-               orderBy: null,
-               total: 0,
-               pages: 1,
-               list: [
-                 {
-                    "id": 1,
-                    "teaName": "学生",
-                    "teaNumber": "职工号",
-                    "email": "邮箱",
-                    "college": "学院",
-                    "professional": 职称（1：助教 2：讲师 3：教授）,
-                    "phone": 电话号码
-                 }
-               ]
-     *     }
+     * "code": 200,
+     * "message": "成功".
+     * "data": {
+     * pageNum: 1,
+     * pageSize: 0,
+     * size: 0,
+     * orderBy: null,
+     * total: 0,
+     * pages: 1,
+     * list: [
+     * {
+     * "id": 1,
+     * "teaName": "学生",
+     * "teaNumber": "职工号",
+     * "email": "邮箱",
+     * "college": "学院",
+     * "professional": 职称（1：助教 2：讲师 3：教授）,
+     * "phone": 电话号码
+     * }
+     * ]
+     * }
      * }
      */
     @GetMapping(value = "taeList")
@@ -140,7 +138,7 @@ public class AdminController {
         if (!UserRoleEnum.ADMIN.getCode().equals(userLogin.getResource())) {
             return new ResultDto(403, "不是管理员没有权限", "");
         }
-        return new ResultDto(200, "查询成功", teacherService.taeList(pageNum,pageSize));
+        return new ResultDto(200, "查询成功", teacherService.taeList(pageNum, pageSize));
     }
     // @formatter:off
     /**
