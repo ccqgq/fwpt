@@ -68,27 +68,27 @@ public class AdminController {
      * pageSize: 每页数据（默认十个）
      * 出参:
      * {
-     * "code": 200,
-     * "message": "成功".
-     * "data": {
-     * pageNum: 1,
-     * pageSize: 0,
-     * size: 0,
-     * orderBy: null,
-     * total: 0,
-     * pages: 1,
-     * list: [
-     * {
-     * "id": 1,
-     * "stuName": "学生姓名",
-     * "stuNumber": "学号",
-     * "email": "邮箱",
-     * "college": "学院",
-     * "grade": "班级",
-     * "status": 0 （状态 0:注册  1:未注册)
-     * }
-     * ]
-     * }
+     *     "code": 200,
+     *     "message": "成功".
+     *     "data": {
+     *         pageNum: 1,
+     *         pageSize: 0,
+     *         size: 0,
+     *         orderBy: null,
+     *         total: 0,
+     *         pages: 1,
+     *         list: [
+     *             {
+     *                 "id": 1,
+     *                 "stuName": "学生姓名",
+     *                 "stuNumber": "学号",
+     *                 "email": "邮箱",
+     *                 "college": "学院",
+     *                 "grade": "班级",
+     *                 "status": 0 （状态 0:注册  1:未注册)
+     *             }
+     *         ]
+     *     }
      * }
      */
     @GetMapping(value = "stuList")

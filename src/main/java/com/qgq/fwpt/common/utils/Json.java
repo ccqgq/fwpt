@@ -20,7 +20,7 @@ public class Json {
     private static class CustomObjectMapper extends ObjectMapper {
         private static final String dateFormatPattern = "yyyy-MM-dd HH:mm:ss";
 
-        public CustomObjectMapper() {
+        private CustomObjectMapper() {
             // 设置时间格式
             this.setDateFormat(new SimpleDateFormat(dateFormatPattern));
 
