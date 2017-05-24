@@ -4,9 +4,12 @@ package com.qgq.fwpt.common.utils;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 /**
@@ -40,5 +43,36 @@ public class Json {
             e.printStackTrace();
         }
         return s;
+    }
+
+    public static JsonNode string2JsonNode(String jsonStr) {
+        JsonNode jsonNode = null;
+        try {
+            jsonNode = objectMapper.readTree(jsonStr);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return jsonNode;
+    }
+
+    public static <T> T jsonNode2Object(JsonNode jsonNode, TypeReference type) {
+        T t = null;
+        try {
+            t = objectMapper.readValue(objectMapper.treeAsTokens(jsonNode), objectMapper.getTypeFactory().constructType(type));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return t;
+    }
+
+
+    public static <T> T jsonNode2Object(JsonNode jsonNode, Class<T> clazz) {
+        T t = null;
+        try {
+            t = objectMapper.treeToValue(jsonNode, clazz);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return t;
     }
 }

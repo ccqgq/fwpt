@@ -83,6 +83,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
                 .addPathPatterns("/**")
                 .excludePathPatterns("/api/user/login")
                 .excludePathPatterns("/api/message/messageList")
+                .excludePathPatterns("/api/phone/message")
                 .excludePathPatterns("/api/stu/grade");
 
         super.addInterceptors(registry);
@@ -101,7 +102,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         jacksonConverter.setSupportedMediaTypes(mediaTypeList);
 
         ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
         objectMapper.setTimeZone(TimeZone.getDefault());
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.PUBLIC_ONLY);

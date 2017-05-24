@@ -38,28 +38,32 @@ public class MessageController {
      * pageSize: 每页数据（默认十个）
      * type: 信息类型（0：就业信息  1：通知通告）
      * 出参:
-     * {
-     *     "code": 200,
-     *     "message": "成功".
-     *     "data": {
-     *         pageNum: 1,
-               pageSize: 0,
-               size: 0,
-               orderBy: null,
-               total: 0,
-               pages: 1,
-               list: [
-                 {
-                    id: 1,
-                    title: "标题",
-                    content: "内容",
-                    type: 1,   信息类型（0：就业信息  1：通知通告）
-                    publisher: "发布人",
-                    createTime: 1491727903000  发布时间
-                 }
-               ]
-     *     }
-     * }
+{
+    code: 200,
+    message: "成功",
+    data: {
+        inform: [
+            {
+                id: 14,
+                title: "放假通知",
+                content: "今天放假。。。测试一下",
+                type: 1,
+                publisher: "管理员",
+                createTime: "2017-04-15 22:07:41"
+            }
+        ],
+        job: [
+            {
+                id: 16,
+                title: "公司招聘",
+                content: "招聘硬件工程师一名",
+                type: 0,
+                publisher: "管理员",
+                createTime: "2017-04-21 10:47:02"
+            }
+        ]
+    }
+}
      */
     //@formatter:on
     @GetMapping(value = "messageList")
