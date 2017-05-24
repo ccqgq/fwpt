@@ -1,6 +1,6 @@
 package com.qgq.fwpt.openaccount.dto;
 
-public class Course {
+public class Performance {
 	private String id;
 	private String number;
 	private String userName;
