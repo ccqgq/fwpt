@@ -22,6 +22,7 @@ public class MessageService {
         MessageExample messageExample = new MessageExample();
         messageExample.createCriteria()
                 .andTypeEqualTo(type);
+        messageExample.setOrderByClause("id desc");
         return messageMapper.selectByExample(messageExample);
     }
 
