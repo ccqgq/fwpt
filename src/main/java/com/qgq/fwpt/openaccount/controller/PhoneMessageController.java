@@ -21,7 +21,7 @@ public class PhoneMessageController {
     @Resource
     private CourseService courseService;
     @PostMapping("message")
-    public void message(String string) {
+    public String message(String string) {
         Grade grade = new Grade();
         String[] arr = string.split(",");
         grade.setNumber(arr[0]);
@@ -29,7 +29,7 @@ public class PhoneMessageController {
         grade.setYear(arr[2]);
         grade.setSemester(arr[3]);
         String json = courseService.postQueryDGrade(grade);
-        SendMessage.sendPerformanceMessage(json,"12345678900");
+        return SendMessage.sendPerformanceMessage(json);
     }
 
 }

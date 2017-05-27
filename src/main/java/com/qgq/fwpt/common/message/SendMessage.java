@@ -14,25 +14,32 @@ import java.util.Objects;
  * @author 繁华
  */
 public class SendMessage {
-    public static void sendPerformanceMessage(String json ,String phone) {
+    public static String sendPerformanceMessage(String json) {
+
         JsonNode jsonNodeCode = Json.string2JsonNode(json).get("code");
         String code = Json.jsonNode2Object(jsonNodeCode,String.class);
         if(!Objects.equals("1",code)) {
             JsonNode jsonNodeMessage = Json.string2JsonNode(json).get("message");
-            send(Json.jsonNode2Object(jsonNodeMessage,String.class),phone);
-            return;
+            return Json.jsonNode2Object(jsonNodeMessage,String.class);
+
         }
         JsonNode jsonNodeData = Json.string2JsonNode(json).get("data");
         List<Performance> data = Json.jsonNode2Object(jsonNodeData, new TypeReference<List<Performance>>() {
         });
-        send(data,phone);
+        return dataFmart(data);
     }
 
-    private static void send (String message,String phone) {
-        System.out.print(message+"发送成功"+phone);
+    private static String dataFmart(List<Performance> data) {
+        StringBuilder builder = new StringBuilder();
+        for (int i=0;i<data.size();i++){
+            if (i==0) {
+                builder.append("姓名:"+data.get(i).getUserName()+"   学号:"+data.get(i).getNumber()+"     ");
+                builder.append(data.get(i).getCourseNmae()+":"+data.get(i).getCount()+"     ");
+            }else {
+                builder.append(data.get(i).getCourseNmae()+":"+data.get(i).getCount()+"     ");
+            }
+        }
+        return builder.toString();
     }
-    private static void send (List<Performance> performances, String phone) {
 
-        System.out.print(performances+"发送成功"+phone);
-    }
 }
