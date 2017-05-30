@@ -20,6 +20,7 @@ public class PhoneMessageController {
 
     @Resource
     private CourseService courseService;
+
     @PostMapping("message")
     public String message(String string) {
         Grade grade = new Grade();
