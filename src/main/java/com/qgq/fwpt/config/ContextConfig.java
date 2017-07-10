@@ -41,12 +41,12 @@ public class ContextConfig {
         PageHelper pageHelper = new PageHelper();
         Properties properties = new Properties();
 
-        //properties.setProperty("dialect","mysql");
+        properties.setProperty("dialect","mysql");
         properties.setProperty("offsetAsPageNum","true");
         properties.setProperty("rowBoundsWithCount","true");
-        //properties.setProperty("pageSizeZero","true");
+        properties.setProperty("pageSizeZero","true");
         properties.setProperty("reasonable","false");
-       // properties.setProperty("params","pageNum=start;pageSize=limit;");
+        properties.setProperty("params","pageNum=start;pageSize=limit;");
         pageHelper.setProperties(properties);
         return pageHelper;
     }

@@ -60,9 +60,11 @@ public class DataSourceConfig {
         logger.info("====== dataSource init========");
         Map<String, String> map = new HashMap<>();
         map.put("driverClassName", "com.mysql.jdbc.Driver");
-        map.put("url","jdbc:mysql://mysql.rdsm3ng1qo9h3js.rds.gz.baidubce.com:3306/fwpt?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&autoReconnectForPools=true&zeroDateTimeBehavior=convertToNull&useSSL=false");
-        map.put("username","rootcc");
-        map.put("password","root123456");
+        map.put("url","jdbc:mysql://118.89.196.155:3306/fwpt?useUnicode" +
+                "=true&characterEncoding=UTF-8&autoReconnect=true&autoReconnectForPools=true&zeroDateTimeBehavior" +
+                "=convertToNull&useSSL=false");
+        map.put("username","qgqcc");
+        map.put("password","QGQcc123@");
         return DruidDataSourceFactory.createDataSource(map);
     }
 
